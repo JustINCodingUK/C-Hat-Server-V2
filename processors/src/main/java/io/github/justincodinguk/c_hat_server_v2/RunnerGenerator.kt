@@ -22,17 +22,14 @@ class RunnerGenerator : AbstractProcessor() {
     private val annotatedMethods = mutableListOf<Element>()
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> {
-        println("WWWW")
         return mutableSetOf(PluginMain::class.java.name)
     }
 
     override fun getSupportedSourceVersion(): SourceVersion {
-        println("AWHA")
         return SourceVersion.latestSupported()
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
-        println("DADA")
         roundEnv?.getElementsAnnotatedWith(PluginMain::class.java)
             ?.forEach {
                 if(it.kind != ElementKind.METHOD) {
