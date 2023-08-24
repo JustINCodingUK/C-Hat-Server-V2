@@ -1,4 +1,4 @@
-Crpackage io.github.justincodinguk.c_hat_server_v2
+package io.github.justincodinguk.c_hat_server_v2
 
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
