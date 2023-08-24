@@ -1,6 +1,6 @@
-package io.github.justincodinguk.c_hat_server_v2.database.dao
+package io.github.justincodinguk.c_hat_server_v2.core.database.dao
 
-import io.github.justincodinguk.c_hat_server_v2.model.ChatUser
+import io.github.justincodinguk.c_hat_server_v2.core.model.ChatUser
 
 interface IChatUserDao {
 
@@ -10,4 +10,7 @@ interface IChatUserDao {
     suspend fun generateClientId(): String
     suspend fun getAllUsers(): List<ChatUser>
 
+    suspend fun getUserByClientId(clientId: String): ChatUser
+
+    suspend fun isOnline(clientId: String, isOnline: Boolean)
 }

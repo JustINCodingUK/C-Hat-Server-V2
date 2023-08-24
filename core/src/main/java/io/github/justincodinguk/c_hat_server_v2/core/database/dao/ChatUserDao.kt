@@ -1,12 +1,9 @@
-package io.github.justincodinguk.c_hat_server_v2.database.dao
+package io.github.justincodinguk.c_hat_server_v2.core.database.dao
 
-import io.github.justincodinguk.c_hat_server_v2.model.ChatUser
-import io.github.justincodinguk.c_hat_server_v2.database.DatabaseFactory.dbQuery
-import io.github.justincodinguk.c_hat_server_v2.model.ChatUsers
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import io.github.justincodinguk.c_hat_server_v2.core.model.ChatUser
+import io.github.justincodinguk.c_hat_server_v2.core.database.DatabaseFactory.dbQuery
+import io.github.justincodinguk.c_hat_server_v2.core.model.ChatUsers
+import org.jetbrains.exposed.sql.*
 
 class ChatUserDao : IChatUserDao {
 
@@ -15,7 +12,8 @@ class ChatUserDao : IChatUserDao {
             clientId = this[ChatUsers.id],
             mailId = this[ChatUsers.mailId],
             username = this[ChatUsers.username],
-            password = this[ChatUsers.password]
+            password = this[ChatUsers.password],
+            isOnline = this[ChatUsers.isOnline]
         )
     }
 
@@ -39,6 +37,7 @@ class ChatUserDao : IChatUserDao {
             it[mailId] = user.mailId
             it[password] = user.password
             it[username] = user.username
+            it[isOnline] = user.isOnline
         }
     }
 
@@ -50,9 +49,25 @@ class ChatUserDao : IChatUserDao {
         clientId
     }
 
+    override suspend fun getUserByClientId(clientId: String): ChatUser  = dbQuery {
+        ChatUsers.select {
+            ChatUsers.id eq clientId
+        }.map {
+            it.toChatUser()
+        }.single()
+    }
+
     override suspend fun getAllUsers(): List<ChatUser>  = dbQuery {
         ChatUsers.selectAll().map {
             it.toChatUser()
+        }
+    }
+
+    override suspend fun isOnline(clientId: String, isOnline: Boolean): Unit = dbQuery {
+        ChatUsers.update(where = {
+            ChatUsers.id eq clientId
+        }) {
+            it[this.isOnline] = isOnline
         }
     }
 

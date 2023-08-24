@@ -1,4 +1,4 @@
-package io.github.justincodinguk.c_hat_server_v2.responses.event
+package io.github.justincodinguk.c_hat_server_v2.core.responses.event
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

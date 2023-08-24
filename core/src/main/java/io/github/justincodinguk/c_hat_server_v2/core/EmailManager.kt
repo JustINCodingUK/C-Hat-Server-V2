@@ -1,4 +1,4 @@
-package io.github.justincodinguk.c_hat_server_v2
+package io.github.justincodinguk.c_hat_server_v2.core
 
 import org.apache.commons.mail.DefaultAuthenticator
 import org.apache.commons.mail.SimpleEmail

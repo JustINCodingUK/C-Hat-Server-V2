@@ -1,8 +1,8 @@
-package io.github.justincodinguk.c_hat_server_v2.database
+package io.github.justincodinguk.c_hat_server_v2.core.database
 
-import io.github.justincodinguk.c_hat_server_v2.model.ChatUsers
+import io.github.justincodinguk.c_hat_server_v2.core.model.ChatUsers
+import io.github.justincodinguk.c_hat_server_v2.core.model.UnreadMessages
 import kotlinx.coroutines.Dispatchers
-import org.h2.engine.SysProperties
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
@@ -17,6 +17,7 @@ object DatabaseFactory {
 
         transaction(database) {
             SchemaUtils.create(ChatUsers)
+            SchemaUtils.create(UnreadMessages)
         }
     }
 

@@ -1,6 +1,6 @@
-package io.github.justincodinguk.c_hat_server_v2.responses
+package io.github.justincodinguk.c_hat_server_v2.core.responses
 
-import io.github.justincodinguk.c_hat_server_v2.responses.event.Event
+import io.github.justincodinguk.c_hat_server_v2.core.responses.event.Event
 import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
