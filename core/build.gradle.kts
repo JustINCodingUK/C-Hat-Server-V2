@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "io.github.justincodinguk.c_hat_server_v2"
-version = "0.0.1"
+version = "0.0.5"
 
 repositories {
     mavenCentral()

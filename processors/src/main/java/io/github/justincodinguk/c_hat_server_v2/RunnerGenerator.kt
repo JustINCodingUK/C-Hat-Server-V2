@@ -1,4 +1,4 @@
-Crpackage io.github.justincodinguk.c_hat_server_v2
+package io.github.justincodinguk.c_hat_server_v2
 
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
@@ -22,17 +22,14 @@ class RunnerGenerator : AbstractProcessor() {
     private val annotatedMethods = mutableListOf<Element>()
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> {
-        println("WWWW")
         return mutableSetOf(PluginMain::class.java.name)
     }
 
     override fun getSupportedSourceVersion(): SourceVersion {
-        println("AWHA")
         return SourceVersion.latestSupported()
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
-        println("DADA")
         roundEnv?.getElementsAnnotatedWith(PluginMain::class.java)
             ?.forEach {
                 if(it.kind != ElementKind.METHOD) {
