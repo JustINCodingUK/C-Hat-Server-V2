@@ -1,8 +1,9 @@
 package io.github.justincodinguk.c_hat_server_v2.core
 
 import io.github.justincodinguk.c_hat_server_v2.core.database.DatabaseFactory
+import io.github.justincodinguk.c_hat_server_v2.core.plugin_manager.PluginManager
 import io.github.justincodinguk.c_hat_server_v2.eventbus.EventBus
-import io.github.justincodinguk.c_hat_server_v2.core.plugins.configureSockets
+import io.github.justincodinguk.c_hat_server_v2.core.sockets.configureSockets
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -15,8 +16,11 @@ fun main() {
 fun Application.module() {
 
     val eventBus = EventBus()
+    val pluginManager = PluginManager(eventBus)
 
-    try {
+    pluginManager.loadPluginsFromDirectory("plugins")
+
+    /*try {
 
         val pluginRunnerClass = ClassLoader.getSystemClassLoader().loadClass("io.github.justincodinguk.c_hat_server_v2.external_plugins.PluginRunner")
         val pluginRunners = pluginRunnerClass.methods
@@ -31,7 +35,7 @@ fun Application.module() {
         }
     } catch (_: ClassNotFoundException){
         log.info("PluginLoader: No plugins found")
-    }
+    }*/
 
     environment.monitor.subscribe(ApplicationStarted) {
         eventBus.start()

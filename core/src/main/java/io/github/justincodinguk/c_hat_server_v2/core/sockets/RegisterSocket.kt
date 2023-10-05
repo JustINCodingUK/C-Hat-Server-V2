@@ -1,4 +1,4 @@
-package io.github.justincodinguk.c_hat_server_v2.core.plugins
+package io.github.justincodinguk.c_hat_server_v2.core.sockets
 
 import io.github.justincodinguk.c_hat_server_v2.core.database.dao.IChatUserDao
 import io.github.justincodinguk.c_hat_server_v2.core.email

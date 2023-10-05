@@ -1,9 +1,8 @@
-package io.github.justincodinguk.c_hat_server_v2.core.plugins
+package io.github.justincodinguk.c_hat_server_v2.core.sockets
 
 import io.github.justincodinguk.c_hat_server_v2.core.responses.*
 import io.github.justincodinguk.c_hat_server_v2.core.database.dao.IChatUserDao
 import io.github.justincodinguk.c_hat_server_v2.core.database.dao.IMessageDao
-import io.github.justincodinguk.c_hat_server_v2.core.model.ChatUser
 import io.github.justincodinguk.c_hat_server_v2.core.model.Message
 import io.github.justincodinguk.c_hat_server_v2.eventbus.Event
 import io.github.justincodinguk.c_hat_server_v2.eventbus.EventBus
