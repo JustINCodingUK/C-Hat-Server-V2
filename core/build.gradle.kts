@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "io.github.justincodinguk.c_hat_server_v2"
-version = "0.0.5"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -45,15 +45,10 @@ application {
 }
 
 tasks.withType<Jar> {
-    // Otherwise you'll get a "No main manifest attribute" error
     manifest {
         attributes["Main-Class"] = "io.github.justincodinguk.c_hat_server_v2.core.ApplicationKt"
     }
-
-    // To avoid the duplicate handling strategy error
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-    // To add all of the dependencies otherwise a "NoClassDefFoundError" error
     from(sourceSets.main.get().output)
 
     dependsOn(configurations.runtimeClasspath)
