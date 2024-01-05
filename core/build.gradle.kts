@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val ktor_version: String by project
@@ -15,7 +16,7 @@ plugins {
 }
 
 group = "io.github.justincodinguk.c_hat_server_v2"
-version = "1.0.0"
+version = "0.9.0"
 
 repositories {
     mavenCentral()
@@ -24,6 +25,7 @@ repositories {
 dependencies {
     implementation(project(":plugins"))
     implementation(project(":eventbus"))
+    implementation(project(":model"))
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-websockets-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
@@ -48,6 +50,7 @@ tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "io.github.justincodinguk.c_hat_server_v2.core.ApplicationKt"
     }
+    archivesName.set("c_hat_server")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(sourceSets.main.get().output)
 
@@ -62,10 +65,10 @@ tasks.getByName<Test>("test") {
 }
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
 }
 
