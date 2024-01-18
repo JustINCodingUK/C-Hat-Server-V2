@@ -27,8 +27,8 @@ class EventBus {
                 try {
                     eventBusScope.launch {
                         println("Calling ${task.callback.name}, on ${task.classInstance.javaClass.name}")
-                        task.callback(task.classInstance, eventObject)
-                        //task.invokeCallback(eventObject)
+
+                        task.invokeCallback(eventObject)
                     }
                 } catch (e: Exception) {
                     throw IllegalStateException("EventBus functions cannot be class members")
