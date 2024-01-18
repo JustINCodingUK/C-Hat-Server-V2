@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":model"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     implementation(kotlin("stdlib-jdk8"))
@@ -26,6 +27,7 @@ val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     jvmTarget = "17"
 }
+
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
     jvmTarget = "17"

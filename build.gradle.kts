@@ -1,29 +1,27 @@
 plugins {
     kotlin("jvm") version "1.8.21" apply(false)
+    id("maven-publish")
 }
 
-val annotationsJar by tasks.registering(Jar::class) {
-    dependsOn(":annotations:jar")
-    from("$rootDir/annotations/build/classes/java/main")
+val devJar by tasks.registering(Jar::class) {
+    archiveFileName = "plugindev.jar"
+    destinationDirectory = layout.buildDirectory.dir("lib/")
+    val modelClasses = fileTree("$rootDir/model/build/classes/kotlin/main")
+    val pluginDevClasses = fileTree("$rootDir/plugindev/build/classes/kotlin/main")
+
+    from(modelClasses, pluginDevClasses)
 }
 
-val modelJar by tasks.registering(Jar::class) {
-    dependsOn(":model:jar")
-    from("$rootDir/model/build/classes/java/main")
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "io.github.justincodinguk.c_hat_server_v2"
+            artifactId = "plugindev"
+            version = "0.0.1"
+
+            dependencies { devJar }
+            artifact(devJar.get().outputs.files.asPath)
+        }
+    }
 }
 
-val eventBusJar by tasks.registering(Jar::class) {
-    dependsOn(":eventbus:jar")
-    from("$rootDir/eventbus/build/classes/java/main")
-}
-
-val processorsJar by tasks.registering(Jar::class) {
-    dependsOn(":processors:jar")
-    from("$rootDir/processors/build/classes/java/main")
-}
-
-val combinedJar by tasks.registering(Jar::class) {
-    dependsOn(modelJar, eventBusJar, annotationsJar)
-    archiveFileName.set("c_hat_server_v2-plugindev.jar")
-    from(modelJar, eventBusJar, annotationsJar)
-}

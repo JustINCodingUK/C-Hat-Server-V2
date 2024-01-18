@@ -26,3 +26,8 @@ val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
     jvmTarget = "17"
 }
+
+java {
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+}

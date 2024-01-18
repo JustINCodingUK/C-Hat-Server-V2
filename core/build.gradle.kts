@@ -23,7 +23,6 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":plugins"))
     implementation(project(":eventbus"))
     implementation(project(":model"))
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
@@ -50,11 +49,11 @@ tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "io.github.justincodinguk.c_hat_server_v2.core.ApplicationKt"
     }
-    archivesName.set("c_hat_server")
+    //archivesName.set("c_hat_server")
+    archiveFileName = "server.jar"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from(sourceSets.main.get().output)
-
-    dependsOn(configurations.runtimeClasspath)
+    from(sourceSets.main.get().output, "$rootDir/plugindev/build/classes/kotlin/main")
+    dependsOn(configurations.runtimeClasspath, ":plugindev:compileKotlin")
     from({
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
     })
@@ -72,3 +71,7 @@ compileTestKotlin.kotlinOptions {
     jvmTarget = "17"
 }
 
+java {
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+}

@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
-    kotlin("kapt")
 }
 
 group = "io.github.justincodinguk.c_hat_server_v2"
@@ -21,9 +20,7 @@ sourceSets {
 }
 
 dependencies {
-    implementation(project(":annotations"))
-    kapt(project(":processors"))
-    implementation(project(":eventbus"))
+    implementation(project(":model"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     implementation(kotlin("stdlib-jdk8"))
@@ -34,9 +31,14 @@ tasks.getByName<Test>("test") {
 }
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
 }
