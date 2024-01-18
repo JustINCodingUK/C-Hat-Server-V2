@@ -8,5 +8,11 @@ enum class Event {
     ON_STOP,
     ON_USER_DISCONNECT,
     ON_REGISTER_COMPLETE,
-    ON_REGISTER_FAILED
+    ON_REGISTER_FAILED;
+
+    fun toFunctionName(): String {
+        return toString().lowercase().replace(Regex("_(.)")) {
+            it.value.uppercase()
+        }.replace("_","")
+    }
 }
